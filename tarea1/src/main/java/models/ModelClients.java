@@ -8,7 +8,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class ModelClients {
-	Connection conexion;
 
 	/**
 	 * Metodo que inserta datos en una tabla
@@ -17,12 +16,18 @@ public class ModelClients {
 	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
 	 */
 
-	public void insertClient(String nombre, String apellido, String direccion, int dni, Date fecha) {
+	public static void insertClient(Connection conexionbd, String nombre, String apellido, String direccion, int dni, String fecha) {
 
 		try {
-			String SQLquery = "insert into clients(nombre,apellido,direccion,dni,fecha) values (" + nombre + ","
-					+ apellido + "," + direccion + "," + dni + "," + fecha + ");";
-			Statement st = conexion.createStatement();
+			String SQLquery = "insert into clientes(nombre,apellido,direccion,dni,fecha) values (" 
+					+ "'" + nombre + "',"
+					+ "'" + apellido + "',"
+					+ "'" + direccion + "',"
+					+ dni + ","
+					+ "'" + fecha + "');";
+			System.out.println(SQLquery);
+			
+			Statement st = conexionbd.createStatement();
 			st.executeUpdate(SQLquery);
 			System.out.println("El cliente a sido guardado correctamente");
 		} catch (SQLException ex) {

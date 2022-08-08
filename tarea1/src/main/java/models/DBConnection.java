@@ -9,19 +9,11 @@ import javax.swing.JOptionPane;
 
 public class DBConnection {
 
-	/** Atributo */
-	public Connection conexion;
-
-	/** Constructor */
-	public DBConnection() {
-		makeConection(conexion);
-	}
-
 	/**
 	 * Metodo donde el usuario introduce los datos de su servidor/sql y se establece
 	 * la conexion
 	 */
-	public void makeConection(Connection conexion) {
+	public static Connection makeConection(Connection conexionbd) {
 		String ip = JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
 
 		String user = JOptionPane.showInputDialog(null, "Usuario: ");
@@ -31,22 +23,24 @@ public class DBConnection {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			conexion = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306?useTimezone=true&serverTimezone=UTC",
+			conexionbd = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306?useTimezone=true&serverTimezone=UTC",
 					user, pass);
 			JOptionPane.showMessageDialog(null, "Conectado al Sevidor");
 		} catch (SQLException | ClassNotFoundException ex) {
 			System.out.println("No se ha podido conectar con mi base de datos");
 			System.out.println(ex);
 		}
+		
+		return conexionbd;
 	}
 
 	/***
 	 * 
 	 */
-	public void useDataBase(String db) {
+	public static void useDataBase(Connection conexionbd, String db) {
 		try {
 			String Querydb = "USE " + db + ";";
-			Statement stdb = conexion.createStatement();
+			Statement stdb = conexionbd.createStatement();
 			stdb.executeUpdate(Querydb);
 
 			System.out.println("Usando la " + db + " base de datos");
@@ -59,10 +53,10 @@ public class DBConnection {
 	/**
 	 * Metodo que cierra la conexion
 	 */
-	public void closeConnection() {
+	public static void closeConnection(Connection conexionbd) {
 
 		try {
-			conexion.close();
+			conexionbd.close();
 			JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión con el servidor");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, ex);
