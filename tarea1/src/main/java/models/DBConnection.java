@@ -39,6 +39,22 @@ public class DBConnection {
 		}
 	}
 
+	/***
+	 * 
+	 */
+	public void useDataBase(String db) {
+		try {
+			String Querydb = "USE " + db + ";";
+			Statement stdb = conexion.createStatement();
+			stdb.executeUpdate(Querydb);
+
+			System.out.println("Usando la " + db + " base de datos");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
+
+	}
+
 	/**
 	 * Metodo que cierra la conexion
 	 */

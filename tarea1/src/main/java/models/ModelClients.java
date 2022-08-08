@@ -15,12 +15,9 @@ public class ModelClients {
 	 * @param db       nombre de la base datos donde se insertaran los datos
 	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
 	 */
-	public void insertData(String db, String SQLquery) {
+	public void insertClient(String SQLquery) {
 
 		try {
-			String Querydb = "USE " + db + ";";
-			Statement stdb = conexion.createStatement();
-			stdb.executeUpdate(Querydb);
 
 			Statement st = conexion.createStatement();
 			st.executeUpdate(SQLquery);
@@ -28,6 +25,19 @@ public class ModelClients {
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
+	}
+
+	public void seeAllClients() {
+
+	}
+
+	public void findClient() {
+	}
+
+	public void updateClient() {
+	}
+
+	public void deleteClient() {
 	}
 
 }
