@@ -14,14 +14,14 @@ public class DBConnection {
 
 	/** Constructor */
 	public DBConnection() {
-		makeConection();
+		makeConection(conexion);
 	}
 
 	/**
 	 * Metodo donde el usuario introduce los datos de su servidor/sql y se establece
 	 * la conexion
 	 */
-	public void makeConection() {
+	public void makeConection(Connection conexion) {
 		String ip = JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
 
 		String user = JOptionPane.showInputDialog(null, "Usuario: ");
@@ -30,6 +30,7 @@ public class DBConnection {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			
 			conexion = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306?useTimezone=true&serverTimezone=UTC",
 					user, pass);
 			JOptionPane.showMessageDialog(null, "Conectado al Sevidor");
