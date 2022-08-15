@@ -33,7 +33,7 @@ public class ModelCientificos {
 
 	public void seeAllCientificos(Connection conexionbd) {
 		try {
-			String SQLquery = "";
+			String SQLquery = "select * from cientificos;";
 			System.out.println(SQLquery);
 
 			Statement st = conexionbd.createStatement();

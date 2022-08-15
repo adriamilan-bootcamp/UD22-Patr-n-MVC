@@ -19,28 +19,70 @@ public class ModelProyectos {
 	public static void insertProyectos(Connection conexionbd, char id, String nombre, int horas) {
 
 		try {
-			String SQLquery = "";
+			String SQLquery = "insert into proyectos(id,nombre,horas) values(" + "'" + id + "'" + "," + "'" + nombre
+					+ "'" + "," + horas + ");";
 			System.out.println(SQLquery);
 
 			Statement st = conexionbd.createStatement();
 			st.executeUpdate(SQLquery);
-			System.out.println("El cliente a sido guardado correctamente");
+			System.out.println("El proyecto a sido guardado correctamente");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
 	}
 
-	public void seeAllProyectos() {
+	public void seeAllProyectos(Connection conexionbd) {
+		try {
+			String SQLquery = "select * from proyectos;";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("estos son todos los proyectos");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 
 	}
 
-	public void findProyecto() {
+	public void findProyecto(Connection conexionbd, char id) {
+		try {
+			String SQLquery = "select * from proyectos where id=" + "'" + id + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("estos son todos los datos del proyecto buscado");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
-	public void updateProyecto() {
+	public void updateProyecto(Connection conexionbd, char id, String nombre, int horas) {
+		try {
+			String SQLquery = "update proyectos set nombre =" + "'" + nombre + "'" + ",horas=" + horas + " where id="
+					+ "'" + id + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("el proyecto a sido actualizado");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
-	public void deleteProyecto() {
+	public void deleteProyecto(Connection conexionbd, char id) {
+		try {
+			String SQLquery = "delete from proyectos where id =" + "'" + id + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("el proyecto a sido eliminado");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
 }
