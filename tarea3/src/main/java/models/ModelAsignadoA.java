@@ -16,31 +16,107 @@ public class ModelAsignadoA {
 	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
 	 */
 
-	public static void insertAsignadoA(Connection conexionbd) {
+	public static void insertAsignadoA(Connection conexionbd, String cientifico, char proyecto) {
 
 		try {
-			String SQLquery = "";
+			String SQLquery = "insert into asignado_a(cientifico,proyecto) values(" + "'" + cientifico + "'" + "," + "'"
+					+ proyecto + "'" + ");";
 			System.out.println(SQLquery);
 
 			Statement st = conexionbd.createStatement();
 			st.executeUpdate(SQLquery);
-			System.out.println("El cliente a sido guardado correctamente");
+			System.out.println("cientifico asignado a proyecto correctamente");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
 	}
 
-	public void seeAllAsignadoA() {
+	public void seeAllAsignadoA(Connection conexionbd) {
+
+		try {
+			String SQLquery = "select * from asignado_a;";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("estos son todos los datos encontrados");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 
 	}
 
-	public void findAsignadoA() {
+	public void findAsignadoAbyCientifico(Connection conexionbd, String cientifico) {
+
+		try {
+			String SQLquery = "select * from asignado_a where cientifico=" + "'" + cientifico + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
-	public void updateAsignadoA() {
+	public void findAsignadoAbProyecto(Connection conexionbd, char proyecto) {
+
+		try {
+			String SQLquery = "select * from asignado_a where proyecto=" + "'" + proyecto + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
-	public void deleteAsignadoA() {
+	public void updateCientificoAsignadoA(Connection conexionbd, String cientifico, char proyecto) {
+
+		try {
+			String SQLquery = "update cientificos set cientifico=" + "'" + cientifico + "'" + " where proyecto=" + "'"
+					+ proyecto + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println(" el cientifico del proyecto a sido actualizado");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
+	}
+
+	public void updateProyectoAsignadoA(Connection conexionbd, char proyecto, String cientifico) {
+
+		try {
+			String SQLquery = "update cientificos set proyecto=" + "'" + proyecto + "'" + " where cientifico=" + "'"
+					+ cientifico + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("el proyecto del cientifico a sido actualizado");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
+	}
+
+	public void deleteAsignadoA(Connection conexionbd, String cientifico, char proyecto) {
+
+		try {
+			String SQLquery = "delete from asignado_a where cientifico=" + "'" + cientifico + "'" + " and proyecto="
+					+ "'" + proyecto + "'" + ";";
+			System.out.println(SQLquery);
+
+			Statement st = conexionbd.createStatement();
+			st.executeUpdate(SQLquery);
+			System.out.println("la relacion entre el cientifico y el proyecto a sido eliminada");
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
 }
