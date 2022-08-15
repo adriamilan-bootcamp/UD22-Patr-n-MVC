@@ -16,7 +16,7 @@ public class ModelCientificos {
 	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
 	 */
 
-	public static void insertCientificos(Connection conexionbd) {
+	public static void insertCientificos(Connection conexionbd, String dni, String nom_apell) {
 
 		try {
 			String SQLquery = "";
@@ -30,17 +30,17 @@ public class ModelCientificos {
 		}
 	}
 
-	public void seeAllClients() {
+	public void seeAllCientificos() {
 
 	}
 
-	public void findClient() {
+	public void findCientifico() {
 	}
 
-	public void updateClient() {
+	public void updateCientifico() {
 	}
 
-	public void deleteClient() {
+	public void deleteCientifico() {
 	}
 
 }
