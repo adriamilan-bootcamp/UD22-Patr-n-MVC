@@ -58,9 +58,10 @@ public class ModelClients {
 	 *  This function tries to find a client by matching the provided name and theirs.
 	 *  It returns a String containing everything regarding the matched client.
 	 *  
-	 *  @param nombre	The name of the client to be searched
+	 *  @param nombre		The name of the client to be searched
+	 *  @param conexionbd	The MySQL handle
 	 *  
-	 *  @return			String containing a dump of that client's information as an String
+	 *  @return				String containing a dump of that client's information as an String
 	 */
 	public static String findClient(Connection conexionbd, String nombre) {
 		// String that will get generated with the client's data (If found)
@@ -110,6 +111,7 @@ public class ModelClients {
 	public void updateClient() {
 	}
 
+	
 	public void deleteClient() {
 	}
 
