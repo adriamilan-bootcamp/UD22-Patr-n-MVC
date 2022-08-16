@@ -18,7 +18,7 @@ public class GetView  extends JFrame{
 		
 		// Anadimos un titulo al programa
 		this.tableName = table;
-		setTitle("Editar" + " " + this.tableName);
+		setTitle("Ver" + " " + this.tableName);
 		
 		// Coordenadas x y  de la aplicacion
 		setBounds(400, 200, 500, 312);
