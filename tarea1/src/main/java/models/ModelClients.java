@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -35,8 +36,20 @@ public class ModelClients {
 		}
 	}
 
-	public void seeAllClients() {
-
+	public static void seeAllClients(Connection conexionbd) {
+		try {
+			String SQLquery = "select * from clientes";
+			System.out.println(SQLquery);
+			
+			Statement st = conexionbd.createStatement();
+			ResultSet allClients = st.executeQuery(SQLquery);
+			while (allClients.next()) {
+		        String coffeeName = allClients.getString(2);
+		        System.out.println(coffeeName);
+		      }
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
 	public void findClient() {

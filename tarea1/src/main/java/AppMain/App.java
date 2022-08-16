@@ -13,6 +13,7 @@ public class App {
 		java_connection = DBConnection.makeConection(java_connection);
 		DBConnection.useDataBase(java_connection, "ud22_01");
 		ModelClients.insertClient(java_connection, "maria", "antonieta", "calle pepe,nr3", 12345678, "2022-05-12");
+		ModelClients.seeAllClients(java_connection);
 		// modelos,vistas y el controlador ->llamar
 		DBConnection.closeConnection(java_connection);
 	}
