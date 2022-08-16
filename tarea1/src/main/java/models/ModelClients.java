@@ -58,12 +58,12 @@ public class ModelClients {
 	 *  This function tries to find a client by matching the provided name and theirs.
 	 *  It returns a String containing everything regarding the matched client.
 	 *  
-	 *  @param nombre		The name of the client to be searched
-	 *  @param conexionbd	The MySQL handle
+	 *  @param clientName			The name of the client to be searched
+	 *  @param databaseConnection	The MySQL handle
 	 *  
-	 *  @return				String containing a dump of that client's information as an String
+	 *  @return						String containing a dump of that client's information as an String
 	 */
-	public static String findClient(Connection conexionbd, String nombre) {
+	public static String findClient(Connection databaseConnection, String clientName) {
 		// String that will get generated with the client's data (If found)
 		StringBuilder clientData = new StringBuilder();
 		
@@ -73,10 +73,10 @@ public class ModelClients {
 			 *  The SQL Query SELECT's everything from the 'clientes' table pattern-matching it
 			 *  with the provided client's name on the function argument
 			 */
-			String SQLquery = "select * from clientes where nombre = '" + nombre + "';";
+			String SQLquery = "select * from clientes where nombre = '" + clientName + "';";
 
 			// SQL Statement to handle
-			Statement st = conexionbd.createStatement();
+			Statement st = databaseConnection.createStatement();
 			
 			// Execute the query
 			ResultSet clientToFind = st.executeQuery(SQLquery);
