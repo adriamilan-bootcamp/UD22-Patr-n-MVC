@@ -95,7 +95,7 @@ public class ViewCientificos extends JFrame {
 
 		panelAdd = new JPanel();
 		panelAdd.setVisible(false);
-		panelAdd.setBackground(Color.GRAY);
+		panelAdd.setBackground(Color.LIGHT_GRAY);
 		panelAdd.setBounds(245, 12, 181, 235);
 		contentPane.add(panelAdd);
 		panelAdd.setLayout(null);
@@ -125,7 +125,7 @@ public class ViewCientificos extends JFrame {
 		panelAdd.add(btnGuardar);
 
 		panelBuscar = new JPanel();
-		panelBuscar.setBackground(Color.ORANGE);
+		panelBuscar.setBackground(Color.LIGHT_GRAY);
 		panelBuscar.setBounds(245, 12, 181, 235);
 		contentPane.add(panelBuscar);
 		panelBuscar.setLayout(null);
@@ -156,7 +156,7 @@ public class ViewCientificos extends JFrame {
 		panelBuscar.setVisible(false);
 
 		panelEliminar = new JPanel();
-		panelEliminar.setBackground(Color.CYAN);
+		panelEliminar.setBackground(Color.LIGHT_GRAY);
 		panelEliminar.setBounds(245, 12, 181, 235);
 		contentPane.add(panelEliminar);
 		panelEliminar.setLayout(null);
@@ -179,7 +179,7 @@ public class ViewCientificos extends JFrame {
 		panelVerTodo = new JPanel();
 		panelVerTodo.setBounds(245, 12, 181, 235);
 		contentPane.add(panelVerTodo);
-		panelVerTodo.setBackground(Color.PINK);
+		panelVerTodo.setBackground(Color.LIGHT_GRAY);
 		panelVerTodo.setLayout(null);
 		panelVerTodo.setVisible(false);
 
@@ -192,7 +192,7 @@ public class ViewCientificos extends JFrame {
 		panelActualizar = new JPanel();
 		panelActualizar.setBounds(245, 12, 181, 235);
 		contentPane.add(panelActualizar);
-		panelActualizar.setBackground(Color.MAGENTA);
+		panelActualizar.setBackground(Color.LIGHT_GRAY);
 		panelActualizar.setLayout(null);
 
 		btnActualiza = new JButton("Actualiza");
@@ -220,7 +220,7 @@ public class ViewCientificos extends JFrame {
 		panel.setVisible(false);
 		panel.setBounds(12, 59, 157, 119);
 		panelActualizar.add(panel);
-		panel.setBackground(Color.MAGENTA);
+		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setLayout(null);
 
 		JLabel lblDni_2 = new JLabel("DNI");
