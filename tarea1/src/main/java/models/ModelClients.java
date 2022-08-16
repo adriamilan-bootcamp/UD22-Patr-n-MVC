@@ -73,7 +73,7 @@ public class ModelClients {
 			 *  The SQL Query SELECT's everything from the 'clientes' table pattern-matching it
 			 *  with the provided client's name on the function argument
 			 */
-			String SQLquery = "select * from clientes where nombre = '" + clientName + "';";
+			String SQLquery = "SELECT * FROM clientes WHERE nombre = '" + clientName + "';";
 
 			// SQL Statement to handle
 			Statement st = databaseConnection.createStatement();
