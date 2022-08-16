@@ -7,11 +7,14 @@ import javax.swing.JOptionPane;
 
 import models.DBConnection;
 import models.ModelClients;
+import views.ViewClients;
 
 public class App {
 
 	public static void main(String[] args) {
-		Connection java_connection = null;
+		ViewClients viewTask1 = new ViewClients();
+		viewTask1.setVisible(true);
+		/*Connection java_connection = null;
 		java_connection = DBConnection.makeConection(java_connection);
 		DBConnection.useDataBase(java_connection, "ud22_01");
 		ModelClients.insertClient(java_connection, "pepe", "viyuela", "calle ona,nr4", 87654321, "2022-05-16");
@@ -21,7 +24,7 @@ public class App {
 		System.out.println(ModelClients.findClient(java_connection, "nuevonombre"));
 		ModelClients.deleteClient(java_connection, "nuevonombre");
 		// modelos,vistas y el controlador ->llamar
-		DBConnection.closeConnection(java_connection);
+		DBConnection.closeConnection(java_connection);*/
 	}
 
 }
