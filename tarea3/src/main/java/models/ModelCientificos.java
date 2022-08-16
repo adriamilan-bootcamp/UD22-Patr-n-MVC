@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class ModelCientificos {
+	private DBConnection conexion = new DBConnection();
 
 	/**
 	 * Metodo que inserta datos en una tabla
@@ -31,18 +33,15 @@ public class ModelCientificos {
 		}
 	}
 
-	public void seeAllCientificos(Connection conexionbd) {
-		try {
+	public ResultSet seeAllCientificos() {
+		
 			String SQLquery = "select * from cientificos;";
-			System.out.println(SQLquery);
-
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("Estos son todos los cientificos.");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		}
-
+			
+			//Statement st = conexionbd.createStatement();
+			//st.executeUpdate(SQLquery);
+			return conexion.getValues( SQLquery);
+			
+		
 	}
 
 	public void findCientifico(Connection conexionbd, String dni) {

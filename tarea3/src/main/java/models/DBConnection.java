@@ -2,12 +2,14 @@ package models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
 public class DBConnection {
+	static Connection conexionbd = null;
 
 	/**
 	 * Metodo donde el usuario introduce los datos de su servidor/sql y se establece
@@ -15,12 +17,15 @@ public class DBConnection {
 	 * 
 	 * @throws ClassNotFoundException
 	 */
-	public static Connection makeConection(Connection conexionbd) throws ClassNotFoundException {
-		String ip = JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
+	public static Connection makeConection() throws ClassNotFoundException {
+		String ip ="192.168.5.215";
+				//JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
 
-		String user = JOptionPane.showInputDialog(null, "Usuario: ");
+		String user = "remote";
+				//JOptionPane.showInputDialog(null, "Usuario: ");
 
-		String pass = JOptionPane.showInputDialog(null, "Contraseña: ");
+		String pass = "27ione91";
+				//JOptionPane.showInputDialog(null, "Contraseña: ");
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -39,7 +44,7 @@ public class DBConnection {
 	/***
 	 * 
 	 */
-	public static void useDataBase(Connection conexionbd, String db) {
+	public static void useDataBase(String db) {
 		try {
 			String Querydb = "USE " + db + ";";
 			Statement stdb = conexionbd.createStatement();
@@ -52,10 +57,24 @@ public class DBConnection {
 
 	}
 
+	public ResultSet getValues(String SQLquery) {
+		ResultSet resultSet = null;
+		try {
+
+			Statement st = conexionbd.createStatement();
+			resultSet = st.executeQuery(SQLquery);
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
+
+		return resultSet;
+	}
+
 	/**
 	 * Metodo que cierra la conexion
 	 */
-	public static void closeConnection(Connection conexionbd) {
+	public static void closeConnection() {
 
 		try {
 			conexionbd.close();
