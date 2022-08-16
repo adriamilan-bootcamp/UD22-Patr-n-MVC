@@ -111,8 +111,31 @@ public class ModelClients {
 	public void updateClient() {
 	}
 
-	
-	public void deleteClient() {
+	/**
+	 *  This function will delete all the records of the client that is specified w/the function
+	 *  argument 'clientName'
+	 *  
+	 *  @param databaseConnection	The MySQL handle
+	 *  @param clientName			The name of the client to be deleted
+	 */
+	public static void deleteClient(Connection databaseConnection, String clientName) {
+		// Surround with Try-Catch to handle SQL-related errors
+		try {
+			/*
+			 *  The SQL Query DELETE's everything from the 'clientes' client pattern-matching it
+			 *  with the provided client's name on the function argument
+			 */
+			String sqlQuery = "DELETE FROM clientes WHERE nombre = '" + clientName + "';";
+
+			// SQL Statement to handle
+			Statement sqlStatement = databaseConnection.createStatement();
+			
+			// Execute the query, use executeUpdate instead of executeQuery to properly update the tables
+			sqlStatement.executeUpdate(sqlQuery);
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
 }
