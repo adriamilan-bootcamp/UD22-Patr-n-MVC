@@ -12,8 +12,9 @@ public class App {
 		Connection java_connection = null;
 		java_connection = DBConnection.makeConection(java_connection);
 		DBConnection.useDataBase(java_connection, "ud22_01");
-		ModelClients.insertClient(java_connection, "maria", "antonieta", "calle pepe,nr3", 12345678, "2022-05-12");
+		ModelClients.insertClient(java_connection, "alex", "pepe", "calle ona,nr4", 87654321, "2022-05-16");
 		ModelClients.seeAllClients(java_connection);
+		ModelClients.findClient(java_connection, "alex");
 		// modelos,vistas y el controlador ->llamar
 		DBConnection.closeConnection(java_connection);
 	}

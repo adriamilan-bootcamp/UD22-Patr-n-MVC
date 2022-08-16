@@ -8,6 +8,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+
 public class ModelClients {
 
 	/**
@@ -52,7 +54,57 @@ public class ModelClients {
 		}
 	}
 
-	public void findClient() {
+	/**
+	 *  This function tries to find a client by matching the provided name and theirs.
+	 *  It returns a String containing everything regarding the matched client.
+	 *  
+	 *  @param nombre	The name of the client to be searched
+	 *  
+	 *  @return			String containing a dump of that client's information as an String
+	 */
+	public static String findClient(Connection conexionbd, String nombre) {
+		// String that will get generated with the client's data (If found)
+		StringBuilder clientData = new StringBuilder();
+		
+		// Surround with Try-Catch to handle SQL-related errors
+		try {
+			/*
+			 *  The SQL Query SELECT's everything from the 'clientes' table pattern-matching it
+			 *  with the provided client's name on the function argument
+			 */
+			String SQLquery = "select * from clientes where nombre = '" + nombre + "';";
+
+			// SQL Statement to handle
+			Statement st = conexionbd.createStatement();
+			
+			// Execute the query
+			ResultSet clientToFind = st.executeQuery(SQLquery);
+			
+			// Query's ResultSet parser-helper
+			ResultSetMetaData resultSetHelper = (ResultSetMetaData) clientToFind.getMetaData();
+
+			// Process the entire clientToFind ResultSet
+			while (clientToFind.next()) {
+				// Loop that starts at i = 2 to skip the 'id' column
+			    for (int i = 2; i <= resultSetHelper.getColumnCount(); i++) {
+			    	// Append the column's name and it's value
+			    	clientData.append(resultSetHelper.getColumnName(i) + ": " + clientToFind.getString(i));
+			    	
+			        // Minor aesthetic aid that helps format the printed string
+			        if (i + 1 <= resultSetHelper.getColumnCount())
+			        {
+			        	clientData.append(", ");
+			        }
+			    }
+			    clientData.append("");
+			}
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
+
+		// Return the client's String
+		return clientData.toString();
 	}
 
 	public void updateClient() {
