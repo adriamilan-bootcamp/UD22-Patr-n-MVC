@@ -140,7 +140,46 @@ public class ModelClients {
 		return clientData.toString();
 	}
 
-	public void updateClient() {
+	/**
+	 *  This function will update all the records of the client that is specified w/the function
+	 *  argument 'clientName'.
+	 *  
+	 *	@param databaseConnection	The MySQL handle.
+	 *	@param clientToChange 		The client to change.
+	 *	@param clientName 			The client's name to update.
+	 *	@param clientSurname		The client's surname to update.
+	 *	@param clientAddress		The client's address to update.
+	 *	@param clientIdentNum		The client's inentification number to update.
+	 *	@param date					The insert's date.
+	 */
+	public static void updateClient(Connection databaseConnection, String clientToChange, String clientName, String clientSurname,
+			String clientAddress, int clientIdentNum, String date) {
+		// Surround with Try-Catch to handle SQL-related errors.
+		try {
+			/**
+			 *	Query that will update a client provided by one of the function's arguments on the 'clientes' table
+			 *	with a set of new function-argument-provided attributes.
+			 */
+			String sqlQuery = "UPDATE clientes\n" +
+							  "SET\n" +
+								  "nombre = '" + clientName + "',\n" +
+								  "apellido = '" + clientSurname + "',\n" +
+								  "direccion = '" + clientAddress + "',\n" +
+								  "dni = " + clientIdentNum + ",\n" +
+								  "fecha = '" + date + "'\n" +
+							  "WHERE\n" +
+							  "nombre = '" + clientToChange + "';";
+			
+			// SQL Statement to handle.
+			Statement sqlStatement = databaseConnection.createStatement();
+						
+			// Execute the query.
+			sqlStatement.executeUpdate(sqlQuery);
+
+			
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+		}
 	}
 
 	/**
@@ -158,7 +197,7 @@ public class ModelClients {
 			 *  with the provided client's name on the function argument.
 			 */
 			String sqlQuery = "DELETE FROM clientes WHERE nombre = '" + clientName + "';";
-
+			
 			// SQL Statement to handle.
 			Statement sqlStatement = databaseConnection.createStatement();
 			
