@@ -73,6 +73,11 @@ public class ViewClients extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Update Client");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerClients.updateClient();
+			}
+		});
 		btnNewButton_3.setEnabled(false);
 		btnNewButton_3.setBounds(242, 186, 131, 25);
 		contentPane.add(btnNewButton_3);

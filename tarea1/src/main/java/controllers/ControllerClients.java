@@ -86,5 +86,37 @@ public class ControllerClients implements ActionListener {
 		}
 		
 	}
+	
+	public static void updateClient() {
+		JTextField newClientName = new JTextField();
+		JTextField newClientSurname = new JTextField();
+		JTextField newClientAddress = new JTextField();
+		JTextField newClientIdentNum = new JTextField();
+		JTextField newDate = new JTextField();
+		
+		Object[] message = {
+		    "New Name: ", newClientName,
+		    "New Surname:", newClientSurname,
+		    "New Address: ", newClientAddress,
+		    "New Ident. Num.: ", newClientIdentNum,
+		    "New Date: ", newDate
+		};
+		
+		String clientToChg = JOptionPane.showInputDialog("Name of the client to update");
+		
+		int result = JOptionPane.showConfirmDialog(null, message, "Update a Client", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (result == JOptionPane.OK_OPTION) {
+		    if (newClientName.getText().length() > 0 && newClientSurname.getText().length() > 0 && newClientAddress.getText().length() > 0 &&
+		    		newClientIdentNum.getText().length() > 0 && newDate.getText().length() > 0) {
+		    	ModelClients.updateClient(java_connection, clientToChg, newClientName.getText().toString(), newClientSurname.getText().toString(),
+		    			newClientAddress.getText().toString(), Integer.parseInt(newClientIdentNum.getText()), newDate.getText().toString());
+		    } else {
+		        JOptionPane.showMessageDialog(null, "All fields must be filled!");
+		    }
+		} else {
+			JOptionPane.showMessageDialog(null, "Insert canceled!");
+		}
+	}
 
 }
