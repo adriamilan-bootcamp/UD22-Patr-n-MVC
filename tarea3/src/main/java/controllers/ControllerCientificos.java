@@ -152,7 +152,7 @@ public class ControllerCientificos implements ActionListener {
 				res = cientifico.findCientifico(dni);// consulta
 				try {
 					while (res.next()) {
-						todaLaInfo = "DNI: " + res.getString("dni") + "\nNombre y apellido: "
+						todaLaInfo = "DNI: \n" + res.getString("dni") + "\nNombre y apellido: \n"
 								+ res.getString("nom_apell");
 
 					}

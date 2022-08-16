@@ -9,10 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Color;
-import javax.swing.JSpinner;
-import javax.swing.JList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 
@@ -211,7 +207,7 @@ public class ViewCientificos extends JFrame {
 
 		btnBuscaCientifParaActulizar = new JButton("");
 
-		btnBuscaCientifParaActulizar.setIcon(new ImageIcon("/home/ionela/git/UD22-Patron-MVC/tarea3/res/lupa.png"));
+		btnBuscaCientifParaActulizar.setIcon(new ImageIcon("res/lupa.png"));
 		btnBuscaCientifParaActulizar.setFont(new Font("Dialog", Font.BOLD, 5));
 		btnBuscaCientifParaActulizar.setBounds(138, 25, 31, 25);
 		panelActualizar.add(btnBuscaCientifParaActulizar);
