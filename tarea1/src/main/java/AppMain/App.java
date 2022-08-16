@@ -13,7 +13,7 @@ public class App {
 		java_connection = DBConnection.makeConection(java_connection);
 		DBConnection.useDataBase(java_connection, "ud22_01");
 		ModelClients.insertClient(java_connection, "alex", "pepe", "calle ona,nr4", 87654321, "2022-05-16");
-		ModelClients.seeAllClients(java_connection);
+		ModelClients.listClients(java_connection);
 		System.out.println("Here");
 		ModelClients.findClient(java_connection, "alex");
 		System.out.println("Here2");

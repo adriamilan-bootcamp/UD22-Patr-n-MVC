@@ -37,17 +37,40 @@ public class ModelClients {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
 	}
-
-	public static void seeAllClients(Connection conexionbd) {
+	/**
+	 *  This function lists all clients in the database.
+	 *  
+	 *  @param databaseConnection	The MySQL handle.
+	 */
+	public static void listClients(Connection databaseConnection) {
+		// Surround with Try-Catch to handle SQL-related errors.
 		try {
-			String SQLquery = "select * from clientes";
-			System.out.println(SQLquery);
+			/*
+			 *  The SQL Query SELECT's everything from the 'clientes' table.
+			 */
+			String sqlQuery = "SELECT * FROM clientes;";
 			
-			Statement st = conexionbd.createStatement();
-			ResultSet allClients = st.executeQuery(SQLquery);
-			while (allClients.next()) {
-		        String coffeeName = allClients.getString(2);
-		        System.out.println(coffeeName);
+			// SQL Statement to handle.
+			Statement sqlStatement = databaseConnection.createStatement();
+			
+			// Execute the query.
+			ResultSet sqlQueryResult = sqlStatement.executeQuery(sqlQuery);
+			
+			// Do this while we still have clients to process.
+			while (sqlQueryResult.next()) {
+				// The client's name is the 2nd column of the table.
+		        String clientName = sqlQueryResult.getString(2);
+		        
+		        // Print the client's name
+		        System.out.print(clientName);
+		        
+		        // Check if we still have more clients to process in order to prettify the output.
+		        if (sqlQueryResult.next())
+		        {
+		        	System.out.print(", ");
+		        }
+		        
+		        System.out.println("");
 		      }
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
@@ -58,40 +81,40 @@ public class ModelClients {
 	 *  This function tries to find a client by matching the provided name and theirs.
 	 *  It returns a String containing everything regarding the matched client.
 	 *  
-	 *  @param clientName			The name of the client to be searched
-	 *  @param databaseConnection	The MySQL handle
+	 *  @param clientName			The name of the client to be searched.
+	 *  @param databaseConnection	The MySQL handle.
 	 *  
-	 *  @return						String containing a dump of that client's information as an String
+	 *  @return						String containing a dump of that client's information as an String.
 	 */
 	public static String findClient(Connection databaseConnection, String clientName) {
-		// String that will get generated with the client's data (If found)
+		// String that will get generated with the client's data (If found).
 		StringBuilder clientData = new StringBuilder();
 		
 		// Surround with Try-Catch to handle SQL-related errors
 		try {
 			/*
 			 *  The SQL Query SELECT's everything from the 'clientes' table pattern-matching it
-			 *  with the provided client's name on the function argument
+			 *  with the provided client's name on the function argument.
 			 */
-			String SQLquery = "SELECT * FROM clientes WHERE nombre = '" + clientName + "';";
+			String sqlQuery = "SELECT * FROM clientes WHERE nombre = '" + clientName + "';";
 
-			// SQL Statement to handle
-			Statement st = databaseConnection.createStatement();
+			// SQL Statement to handle.
+			Statement sqlStatement = databaseConnection.createStatement();
 			
-			// Execute the query
-			ResultSet clientToFind = st.executeQuery(SQLquery);
+			// Execute the query.
+			ResultSet clientToFind = sqlStatement.executeQuery(sqlQuery);
 			
-			// Query's ResultSet parser-helper
+			// Query's ResultSet parser-helper.
 			ResultSetMetaData resultSetHelper = (ResultSetMetaData) clientToFind.getMetaData();
 
-			// Process the entire clientToFind ResultSet
+			// Process the entire clientToFind ResultSet.
 			while (clientToFind.next()) {
-				// Loop that starts at i = 2 to skip the 'id' column
+				// Loop that starts at i = 2 to skip the 'id' column.
 			    for (int i = 2; i <= resultSetHelper.getColumnCount(); i++) {
-			    	// Append the column's name and it's value
+			    	// Append the column's name and it's value.
 			    	clientData.append(resultSetHelper.getColumnName(i) + ": " + clientToFind.getString(i));
 			    	
-			        // Minor aesthetic aid that helps format the printed string
+			        // Minor aesthetic aid that helps format the printed string.
 			        if (i + 1 <= resultSetHelper.getColumnCount())
 			        {
 			        	clientData.append(", ");
@@ -104,7 +127,7 @@ public class ModelClients {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
 
-		// Return the client's String
+		// Return the client's String.
 		return clientData.toString();
 	}
 
@@ -113,24 +136,24 @@ public class ModelClients {
 
 	/**
 	 *  This function will delete all the records of the client that is specified w/the function
-	 *  argument 'clientName'
+	 *  argument 'clientName'.
 	 *  
-	 *  @param databaseConnection	The MySQL handle
-	 *  @param clientName			The name of the client to be deleted
+	 *  @param databaseConnection	The MySQL handle.
+	 *  @param clientName			The name of the client to be deleted.
 	 */
 	public static void deleteClient(Connection databaseConnection, String clientName) {
-		// Surround with Try-Catch to handle SQL-related errors
+		// Surround with Try-Catch to handle SQL-related errors.
 		try {
 			/*
 			 *  The SQL Query DELETE's everything from the 'clientes' client pattern-matching it
-			 *  with the provided client's name on the function argument
+			 *  with the provided client's name on the function argument.
 			 */
 			String sqlQuery = "DELETE FROM clientes WHERE nombre = '" + clientName + "';";
 
-			// SQL Statement to handle
+			// SQL Statement to handle.
 			Statement sqlStatement = databaseConnection.createStatement();
 			
-			// Execute the query, use executeUpdate instead of executeQuery to properly update the tables
+			// Execute the query, use executeUpdate instead of executeQuery to properly update the tables.
 			sqlStatement.executeUpdate(sqlQuery);
 
 		} catch (SQLException ex) {
