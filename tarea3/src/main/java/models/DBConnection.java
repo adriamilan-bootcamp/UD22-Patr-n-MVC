@@ -18,14 +18,11 @@ public class DBConnection {
 	 * @throws ClassNotFoundException
 	 */
 	public static Connection makeConection() throws ClassNotFoundException {
-		String ip ="192.168.5.215";
-				//JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
+		String ip = JOptionPane.showInputDialog(null, "Introduce los datos de la conexión sql\nIp:");
 
-		String user = "remote";
-				//JOptionPane.showInputDialog(null, "Usuario: ");
+		String user = JOptionPane.showInputDialog(null, "Usuario: ");
 
-		String pass = "27ione91";
-				//JOptionPane.showInputDialog(null, "Contraseña: ");
+		String pass = JOptionPane.showInputDialog(null, "Contraseña: ");
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -70,25 +67,25 @@ public class DBConnection {
 
 		return resultSet;
 	}
-	
-	 public void execQuery (String SQLquery) {
-	        try {
-	            Statement stqr = this.conexionbd.createStatement();
-	            stqr.executeQuery(SQLquery);
-	        } catch (Exception e) {
-	            // TODO: handle exception
-	        }
-	    }
-	    
-	    public void updateQuery(String SQLquery) {
-	        try {
-	            Statement stup = this.conexionbd.createStatement();
-	            stup.executeUpdate(SQLquery);
-	            JOptionPane.showMessageDialog(null, "Se ha actualizado correctamente!");
-	        } catch (Exception e) {
-	            // TODO: handle exception
-	        }
-	    }
+
+	public void execQuery(String SQLquery) {
+		try {
+			Statement stqr = this.conexionbd.createStatement();
+			stqr.executeQuery(SQLquery);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void updateQuery(String SQLquery) {
+		try {
+			Statement stup = this.conexionbd.createStatement();
+			stup.executeUpdate(SQLquery);
+			JOptionPane.showMessageDialog(null, "Se ha actualizado correctamente!");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	/**
 	 * Metodo que cierra la conexion
