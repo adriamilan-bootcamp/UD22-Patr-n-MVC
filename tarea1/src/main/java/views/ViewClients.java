@@ -48,18 +48,28 @@ public class ViewClients extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Insert Client");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerClients.insertClient();
+			}
+		});
 		btnNewButton.setEnabled(false);
 		btnNewButton.setBounds(73, 126, 126, 25);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Delete Client");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerClients.deleteClient();
+			}
+		});
 		btnNewButton_1.setEnabled(false);
 		btnNewButton_1.setBounds(73, 186, 126, 25);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("List Clients");
 		btnNewButton_2.setEnabled(false);
-		btnNewButton_2.setBounds(247, 126, 126, 25);
+		btnNewButton_2.setBounds(242, 126, 131, 25);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Update Client");
