@@ -33,10 +33,21 @@ public class SQLConnection {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conexion = DriverManager.getConnection("jdbc:mysql://"+ip+":3306?useTimezone=true&serverTimezone=UTC",user,pass);
-			JOptionPane.showMessageDialog(null,"Conectado al Sevidor");				
+			JOptionPane.showMessageDialog(null,"Conectado al Sevidor");		
+			selectDB();
 		}catch (SQLException | ClassNotFoundException ex ) {
 			System.out.println("No se ha podido conectar con mi base de datos");
 			System.out.println(ex);
+		}
+	}
+	
+	public void selectDB() {
+		try {
+			String Querydb = "USE tarea02db;";
+			Statement stdb = this.conexion.createStatement();
+			stdb.executeUpdate(Querydb);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	
@@ -56,9 +67,6 @@ public class SQLConnection {
 	public ResultSet getValues (String SQLquery) {
 		java.sql.ResultSet resultSet = null;
 		try {
-			String Querydb = "USE " + this.dbname + ";";
-			Statement stdb = this.conexion.createStatement();
-			stdb.executeUpdate(Querydb);
 			
 			Statement st = this.conexion.createStatement();
 			resultSet = st.executeQuery(SQLquery);
@@ -69,5 +77,25 @@ public class SQLConnection {
 		
 		return resultSet;
 	}
+	
+	public void execQuery (String SQLquery) {
+		try {
+			Statement stqr = this.conexion.createStatement();
+			stqr.executeQuery(SQLquery);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public void updateQuery(String SQLquery) {
+		try {
+			Statement stup = this.conexion.createStatement();
+			stup.executeUpdate(SQLquery);
+			JOptionPane.showMessageDialog(null, "Se ha actualizado correctamente!");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 }
 	

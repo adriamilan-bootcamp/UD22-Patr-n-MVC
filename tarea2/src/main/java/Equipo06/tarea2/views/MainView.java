@@ -13,6 +13,8 @@ public class MainView extends JFrame {
 	public JButton editar_videos;
 	public JButton eliminar_clientes;
 	public JButton eliminar_videos;
+	public JButton crear_cliente;
+	public JButton crear_videos;
 	
 	public MainView() {
 		
@@ -61,11 +63,11 @@ public class MainView extends JFrame {
 		this.eliminar_videos.setBounds(298, 213, 190, 50);
 		contentPane.add(eliminar_videos);
 		
-		JButton crear_cliente = new JButton("Crear Clientes");
+		crear_cliente = new JButton("Crear Clientes");
 		crear_cliente.setBounds(12, 87, 190, 50);
 		contentPane.add(crear_cliente);
 		
-		JButton crear_videos = new JButton("Crear Videos");
+		crear_videos = new JButton("Crear Videos");
 		crear_videos.setBounds(298, 87, 190, 50);
 		contentPane.add(crear_videos);
 	
