@@ -118,5 +118,9 @@ public class ControllerClients implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Insert canceled!");
 		}
 	}
+	
+	public static void listClients() {
+		JOptionPane.showMessageDialog(null, ModelClients.listClients(java_connection));
+	}
 
 }

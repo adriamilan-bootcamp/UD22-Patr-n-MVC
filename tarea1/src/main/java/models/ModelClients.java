@@ -51,7 +51,9 @@ public class ModelClients {
 	 *  
 	 *  @param databaseConnection	The MySQL handle.
 	 */
-	public static void listClients(Connection databaseConnection) {
+	public static String listClients(Connection databaseConnection) {
+		StringBuilder clientsList = new StringBuilder();
+		
 		// Surround with Try-Catch to handle SQL-related errors.
 		try {
 			/*
@@ -65,25 +67,23 @@ public class ModelClients {
 			// Execute the query.
 			ResultSet sqlQueryResult = sqlStatement.executeQuery(sqlQuery);
 			
-			// Do this while we still have clients to process.
+			ResultSetMetaData resultSetHelper = (ResultSetMetaData) sqlQueryResult.getMetaData();
+			
+			// Process the entire clientToFind ResultSet.
 			while (sqlQueryResult.next()) {
-				// The client's name is the 2nd column of the table.
-		        String clientName = sqlQueryResult.getString(2);
-		        
-		        // Print the client's name
-		        System.out.print(clientName);
-		        
-		        // Check if we still have more clients to process in order to prettify the output.
-		        if (sqlQueryResult.next())
-		        {
-		        	System.out.print(", ");
-		        }
-		        
-		        System.out.println("");
-		      }
+				// Loop that starts at i = 2 to skip the 'id' column.
+			    for (int i = 2; i <= 2; i++) {
+			    	// Append the column's name and it's value.
+			    	clientsList.append(sqlQueryResult.getString(i) + "\n");
+
+			    }
+			}
+
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
+		
+		return clientsList.toString();
 	}
 
 	/**
