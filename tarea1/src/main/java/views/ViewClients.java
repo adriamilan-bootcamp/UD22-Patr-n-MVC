@@ -68,6 +68,11 @@ public class ViewClients extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("List Clients");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerClients.listClients();
+			}
+		});
 		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.setBounds(242, 126, 131, 25);
 		contentPane.add(btnNewButton_2);
