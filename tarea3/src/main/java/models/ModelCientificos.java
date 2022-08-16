@@ -23,7 +23,6 @@ public class ModelCientificos {
 
 		String SQLquery = "insert into cientificos(dni,nom_apell) values(" + "'" + dni + "'," + "'" + nom_apell + "'"
 				+ ");";
-		System.out.println(SQLquery);
 
 		conexion.updateQuery(SQLquery);
 
@@ -32,51 +31,28 @@ public class ModelCientificos {
 	public ResultSet seeAllCientificos() {
 
 		String SQLquery = "select * from cientificos;";
-
-		// Statement st = conexionbd.createStatement();
-		// st.executeUpdate(SQLquery);
 		return conexion.getValues(SQLquery);
 
 	}
 
-	public void findCientifico(String dni) {
-		try {
-			String SQLquery = "select * from cientificos where dni=" + "'" + dni + "'" + ";";
-			System.out.println(SQLquery);
+	public ResultSet findCientifico(String dni) {
 
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("Esto es todo lo que hay del cientifico buscado");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		}
+		String SQLquery = "select * from cientificos where dni=" + "'" + dni + "'" + ";";
+		return conexion.getValues(SQLquery);
 	}
 
 	public void updateCientifico(String dni, String nom_apell) {
-		try {
-			String SQLquery = "update cientificos set nom_apell=" + "'" + nom_apell + "' where dni =" + "'" + dni + "'"
-					+ ";";
-			System.out.println(SQLquery);
 
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("Datos cientifico actualizados");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		}
+		String SQLquery = "update cientificos set nom_apell=" + "'" + nom_apell + "' where dni =" + "'" + dni + "'"
+				+ ";";
+		conexion.updateQuery(SQLquery);
 	}
 
 	public void deleteCientifico(String dni) {
-		try {
-			String SQLquery = "delete from cientificos where dni =" + "'" + dni + "'" + ";";
-			System.out.println(SQLquery);
 
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("Datos cientifico eliminados");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		}
+		String SQLquery = "delete from cientificos where dni =" + "'" + dni + "'" + ";";
+		System.out.println(SQLquery);
+		conexion.updateQuery(SQLquery);
 	}
 
 }

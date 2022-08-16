@@ -29,6 +29,11 @@ public class ControllerCientificos implements ActionListener {
 		actionBtnActualizar();
 		actionBtnEliminar();
 		actionBtnAddCientifico();
+
+		actionBtnBuscaById();
+		actionBtnEliminarById();
+		actionBtnLupa();
+		actionBtnActualizarDatos();
 	}
 
 	public void actionBtnAdd() {
@@ -117,7 +122,6 @@ public class ControllerCientificos implements ActionListener {
 	}
 
 	public String obtenerTodo() {
-		// ArrayList<String> listado = new ArrayList<String>();
 		String todaLaInfo = "";
 		ResultSet res = null;
 		res = cientifico.seeAllCientificos();
@@ -138,6 +142,31 @@ public class ControllerCientificos implements ActionListener {
 		viewCientificos.getTextArea().setText(listado);
 	}
 
+	public void actionBtnBuscaById() {
+		viewCientificos.getBtnBuscaById().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// recuperar info dada por el usuario
+				String dni = viewCientificos.getTfDniInput().getText();
+				String todaLaInfo = "";
+				ResultSet res = null;
+				res = cientifico.findCientifico(dni);// consulta
+				try {
+					while (res.next()) {
+						todaLaInfo = "DNI: " + res.getString("dni") + "\nNombre y apellido: "
+								+ res.getString("nom_apell");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				viewCientificos.getTfDniInput().setText("");
+				viewCientificos.getTextAreaMuestraDatos().setText(todaLaInfo);
+
+			}
+		});
+	}
+
 	// se crea la ventana
 	private void ventanaCientificos() {
 		viewMain.setVisible(false);
@@ -155,16 +184,64 @@ public class ControllerCientificos implements ActionListener {
 	public void actionBtnAddCientifico() {
 		viewCientificos.getBtnGuardar().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String dni=viewCientificos.getTfDni().getText();
+				String dni = viewCientificos.getTfDni().getText();
 				String nom_apell = viewCientificos.getTfNomApell().getText();
-				cientifico.insertCientificos( dni, nom_apell);
+				cientifico.insertCientificos(dni, nom_apell);
 				viewCientificos.getTfDni().setText("");
 				viewCientificos.getTfNomApell().setText("");
-				
-				
+
 			}
 		});
 	}
+
+	public void actionBtnEliminarById() {
+		viewCientificos.getBtnEliminar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String dni = viewCientificos.getTfDniEliminar().getText();
+				cientifico.deleteCientifico(dni);
+				viewCientificos.getTfDniEliminar().setText("");
+			}
+		});
+	}
+
+	public void actionBtnLupa() {
+		viewCientificos.getBtnBuscaCientifParaActulizar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String dni = viewCientificos.getTfDniActualiza().getText();
+				ResultSet res = cientifico.findCientifico(dni);
+				viewCientificos.getPanel().setVisible(true);
+				String dniA = null;
+				String nom_apellA = null;
+				try {
+					while (res.next()) {
+						dniA = res.getString("dni");
+						nom_apellA = res.getString("nom_apell");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				viewCientificos.getTfDniParaActualizar().setText(dniA);
+				viewCientificos.getTfNomApellParaActualizar().setText(nom_apellA);
+				viewCientificos.getTfDniActualiza().setText("");
+
+			}
+		});
+	}
+
+	public void actionBtnActualizarDatos() {
+		viewCientificos.getBtnActualiza().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String dni = viewCientificos.getTfDniParaActualizar().getText();
+				String nom_apell = viewCientificos.getTfNomApellParaActualizar().getText();
+				cientifico.updateCientifico(dni, nom_apell);
+				viewCientificos.getTfDniParaActualizar().setText("");
+				viewCientificos.getTfNomApellParaActualizar().setText("");
+			}
+		});
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
