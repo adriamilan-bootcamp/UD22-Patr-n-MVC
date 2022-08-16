@@ -23,4 +23,6 @@ CREATE TABLE `videos` (
   `cli_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `videos_fk` FOREIGN KEY (`cli_id`) REFERENCES `cliente` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
