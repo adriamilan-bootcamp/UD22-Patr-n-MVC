@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-
 import javax.swing.JOptionPane;
 
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
@@ -13,26 +11,37 @@ import com.mysql.cj.jdbc.result.ResultSetMetaData;
 public class ModelClients {
 
 	/**
-	 * Metodo que inserta datos en una tabla
+	 *	This function inserts clienst to the database based on the function arguments detailed below.
 	 * 
-	 * @param db       nombre de la base datos donde se insertaran los datos
-	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
+	 *	@param databaseConnection	The MySQL handle.
+	 *	@param clientName 			The client's name to insert.
+	 *	@param clientSurname		The client's surname to insert.
+	 *	@param clientAddress		The client's address to insert.
+	 *	@param clientIdentNum		The client's inentification number to insert.
+	 *	@param date					The insert's date.
 	 */
+	public static void insertClient(Connection databaseConnection, String clientName, String clientSurname,
+			String clientAddress, int clientIdentNum, String date) {
 
-	public static void insertClient(Connection conexionbd, String nombre, String apellido, String direccion, int dni, String fecha) {
-
+		// Surround with Try-Catch to handle SQL-related errors.
 		try {
-			String SQLquery = "insert into clientes(nombre,apellido,direccion,dni,fecha) values (" 
-					+ "'" + nombre + "',"
-					+ "'" + apellido + "',"
-					+ "'" + direccion + "',"
-					+ dni + ","
-					+ "'" + fecha + "');";
-			System.out.println(SQLquery);
+			/**
+			 *	Query that will insert into 'clientes' table a new client w/the function's specified attributes.
+			 */
+			String sqlQuery = "INSERT INTO clientes(nombre,apellido,direccion,dni,fecha) VALUES (" 
+					+ "'" + clientName + "',"
+					+ "'" + clientSurname + "',"
+					+ "'" + clientAddress + "',"
+					+ clientIdentNum + ","
+					+ "'" + date + "');";
 			
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("El cliente a sido guardado correctamente");
+			// SQL Statement to handle.
+			Statement sqlStatement = databaseConnection.createStatement();
+			
+			// Execute the query.
+			sqlStatement.executeUpdate(sqlQuery);
+			
+			System.out.println("The client has been succesfully saved on the database!");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
 		}
