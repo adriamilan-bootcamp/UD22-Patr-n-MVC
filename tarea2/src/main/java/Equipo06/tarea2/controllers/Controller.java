@@ -15,7 +15,7 @@ import Equipo06.tarea2.views.MainView;
 
 public class Controller {
 
-	private SQLConnection connection = new SQLConnection(); 
+	private SQLConnection connection = new SQLConnection();
 	private MainView menu = new MainView();
 	private GetView getView;
 	
