@@ -11,6 +11,8 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import javax.swing.JSpinner;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewCientificos extends JFrame {
 
@@ -21,7 +23,7 @@ public class ViewCientificos extends JFrame {
 	private JPanel panelBuscar;
 	private JPanel panelVerTodo;
 	private JTextField tfDni;
-	private JTextField textField;
+	private JTextField tfNomApell;
 	private JButton btnAddCientifico;
 	private JButton btnVolver;
 	private JButton btnEliminarCientifico;
@@ -97,12 +99,13 @@ public class ViewCientificos extends JFrame {
 		lblNewLabel_1.setBounds(12, 82, 140, 15);
 		panelAdd.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		textField.setBounds(12, 98, 114, 19);
-		panelAdd.add(textField);
-		textField.setColumns(10);
+		tfNomApell = new JTextField();
+		tfNomApell.setBounds(12, 98, 114, 19);
+		panelAdd.add(tfNomApell);
+		tfNomApell.setColumns(10);
 
 		btnGuardar = new JButton("Guardar");
+	
 		btnGuardar.setBounds(31, 198, 117, 25);
 		panelAdd.add(btnGuardar);
 
@@ -125,6 +128,10 @@ public class ViewCientificos extends JFrame {
 		panelBuscar.setBounds(247, 12, 181, 235);
 		contentPane.add(panelBuscar);
 		panelBuscar.setLayout(null);
+		
+		JLabel lblDni = new JLabel("DNI");
+		lblDni.setBounds(0, 0, 83, 27);
+		panelBuscar.add(lblDni);
 		panelBuscar.setVisible(false);
 
 		panelActualizar = new JPanel();
@@ -195,5 +202,12 @@ public class ViewCientificos extends JFrame {
 		return textArea;
 	}
 
+	public JTextField getTfDni() {
+		return tfDni;
+	}
+
+	public JTextField getTfNomApell() {
+		return tfNomApell;
+	}
 	
 }

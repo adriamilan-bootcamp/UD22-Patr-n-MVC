@@ -70,6 +70,25 @@ public class DBConnection {
 
 		return resultSet;
 	}
+	
+	 public void execQuery (String SQLquery) {
+	        try {
+	            Statement stqr = this.conexionbd.createStatement();
+	            stqr.executeQuery(SQLquery);
+	        } catch (Exception e) {
+	            // TODO: handle exception
+	        }
+	    }
+	    
+	    public void updateQuery(String SQLquery) {
+	        try {
+	            Statement stup = this.conexionbd.createStatement();
+	            stup.executeUpdate(SQLquery);
+	            JOptionPane.showMessageDialog(null, "Se ha actualizado correctamente!");
+	        } catch (Exception e) {
+	            // TODO: handle exception
+	        }
+	    }
 
 	/**
 	 * Metodo que cierra la conexion

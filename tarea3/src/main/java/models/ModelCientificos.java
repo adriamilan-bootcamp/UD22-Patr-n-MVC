@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ModelCientificos {
 	private DBConnection conexion = new DBConnection();
+	static Connection conexionbd = null;
 
 	/**
 	 * Metodo que inserta datos en una tabla
@@ -18,33 +19,27 @@ public class ModelCientificos {
 	 * @param SQLquery sentencia sql de la insercion de los datos en la tabla
 	 */
 
-	public static void insertCientificos(Connection conexionbd, String dni, String nom_apell) {
+	public void insertCientificos(String dni, String nom_apell) {
 
-		try {
-			String SQLquery = "insert into cientificos(dni,nom_apell) values(" + "'" + dni + "'" + nom_apell + "'"
-					+ ");";
-			System.out.println(SQLquery);
+		String SQLquery = "insert into cientificos(dni,nom_apell) values(" + "'" + dni + "'," + "'" + nom_apell + "'"
+				+ ");";
+		System.out.println(SQLquery);
 
-			Statement st = conexionbd.createStatement();
-			st.executeUpdate(SQLquery);
-			System.out.println("El cliente a sido guardado correctamente");
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-		}
+		conexion.updateQuery(SQLquery);
+
 	}
 
 	public ResultSet seeAllCientificos() {
-		
-			String SQLquery = "select * from cientificos;";
-			
-			//Statement st = conexionbd.createStatement();
-			//st.executeUpdate(SQLquery);
-			return conexion.getValues( SQLquery);
-			
-		
+
+		String SQLquery = "select * from cientificos;";
+
+		// Statement st = conexionbd.createStatement();
+		// st.executeUpdate(SQLquery);
+		return conexion.getValues(SQLquery);
+
 	}
 
-	public void findCientifico(Connection conexionbd, String dni) {
+	public void findCientifico(String dni) {
 		try {
 			String SQLquery = "select * from cientificos where dni=" + "'" + dni + "'" + ";";
 			System.out.println(SQLquery);
@@ -57,7 +52,7 @@ public class ModelCientificos {
 		}
 	}
 
-	public void updateCientifico(Connection conexionbd, String dni, String nom_apell) {
+	public void updateCientifico(String dni, String nom_apell) {
 		try {
 			String SQLquery = "update cientificos set nom_apell=" + "'" + nom_apell + "' where dni =" + "'" + dni + "'"
 					+ ";";
@@ -71,7 +66,7 @@ public class ModelCientificos {
 		}
 	}
 
-	public void deleteCientifico(Connection conexionbd, String dni) {
+	public void deleteCientifico(String dni) {
 		try {
 			String SQLquery = "delete from cientificos where dni =" + "'" + dni + "'" + ";";
 			System.out.println(SQLquery);

@@ -28,6 +28,7 @@ public class ControllerCientificos implements ActionListener {
 		actionBtnVolver();
 		actionBtnActualizar();
 		actionBtnEliminar();
+		actionBtnAddCientifico();
 	}
 
 	public void actionBtnAdd() {
@@ -151,6 +152,19 @@ public class ControllerCientificos implements ActionListener {
 		});
 	}
 
+	public void actionBtnAddCientifico() {
+		viewCientificos.getBtnGuardar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String dni=viewCientificos.getTfDni().getText();
+				String nom_apell = viewCientificos.getTfNomApell().getText();
+				cientifico.insertCientificos( dni, nom_apell);
+				viewCientificos.getTfDni().setText("");
+				viewCientificos.getTfNomApell().setText("");
+				
+				
+			}
+		});
+	}
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
